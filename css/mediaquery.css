@@ -1,0 +1,29 @@
+.span_1_of_5 {
+    background-color: #fff !important;
+}
+@media only screen and (max-width: 480px){
+.span_1_of_2 {
+     width: 49.5%;
+}
+.span_1_of_5 {
+    width: 47.5%;
+    border: 1px solid #ccc;
+}
+.right {
+    width: 100%;
+}
+.sidebar {
+    display: none;
+}
+.topbar{
+    display :block;
+    border-bottom: 1px solid #ccc;
+}
+.header-right {
+    float: right;
+}
+.topbarmob{
+    display: none;
+}
+
+}
