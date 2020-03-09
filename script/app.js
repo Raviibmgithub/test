@@ -1,0 +1,4 @@
+function mainApp(){
+    headercomp();
+    getItems();
+}

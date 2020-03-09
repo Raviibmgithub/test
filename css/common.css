@@ -4,7 +4,23 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #eee;
+  font : 100%/1.4 'Verdana';
+  color:#5a4b4b;
 }
+
+
+
+	/*  
+	======================== 
+	- Note: These styles are just to pretty the basic page up a bit.
+	You should ignore these when copying and pasting into your site 
+	because your stylesheet should take care of making it look pretty!
+	======================== 
+	*/
+	
+
+
+
 
 * {
     box-sizing: border-box;
@@ -170,6 +186,11 @@ body {
     background: #eee;
     border: none;
     font-size: 10px;
+    margin-left: 4%;
+}
+.inputslideval1{
+ margin-left: 40%;
+ text-align: right;
 }
 .filterbtn{
     width: 37%;
@@ -196,9 +217,25 @@ body {
   } */
 
   .sortmenu{
-    display: flex; 
+    display: flex;
+    margin-left: 10px;
  
   }
+
+  .sortmenu a {
+    text-decoration: none;
+    color: #5a4b4b;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .sortmenu .active {
+    text-decoration: underline;
+    color: #2874f0;
+  }
+
+
+
   .sortheadtxt{
       font-weight: 700;
       margin-right: 10px;
@@ -265,3 +302,14 @@ body {
     /* font-weight: bold; */
 }
 /* Popup box BEGIN */
+
+h1 { font-size:2.2em; padding:0 0 .5em 0; }
+h2 { font-size:1.5em; }
+.col { 
+background: #eee;
+  padding: 1em 0;
+  text-align: center;
+  margin-top: -4px;
+  margin-right: 3px;
+margin-left: 0px;
+}

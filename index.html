@@ -49,137 +49,39 @@
 	<link rel="stylesheet" href="css/12cols.css" media="all">
 	<link rel="stylesheet" href="css/common.css" media="all">
 	<link rel="stylesheet" href="css/mediaquery.css" media="all">
-
-	<style type="text/css">
-
-	/*  
-	======================== 
-	- Note: These styles are just to pretty the basic page up a bit.
-	You should ignore these when copying and pasting into your site 
-	because your stylesheet should take care of making it look pretty!
-	======================== 
-	*/
-	body {font : 100%/1.4 'Verdana'; 	
- }
-	h1 { font-size:2.2em; padding:0 0 .5em 0; }
-	h2 { font-size:1.5em; }
-	.col { 
-	background: #eee;
-    padding: 1em 0;
-    text-align: center;
-    margin-top: -4px;
-    margin-right: 3px;
-	margin-left: 0px;
-	}
-
-	</style>
-
 <script>
-	var counter = 0;
-	$( function() {
-	  $( "#slider-range" ).slider({
-		range: true,
-		min: 0,
-		max: 1000,
-		values: [ 0, 1000 ],
-		slide: function( event, ui ) {
-		  $( "#minval" ).val( "$" + ui.values[ 0 ] );
-		  $( "#maxval" ).val( "$" + ui.values[ 1 ] );
-		}
-	  });
-	  $( "#minval" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ));
-	  $( "#maxval" ).val( "$" + $( "#slider-range" ).slider( "values", 1 ) );
-	} );
-
-	$(window).load(function () {
-    $(".trigger_popup_fricc").click(function(){
-       $('.hover_bkgr_fricc').show();
-    });
-    $('.hover_bkgr_fricc').click(function(){
-        $('.hover_bkgr_fricc').hide();
-    });
-    $('.popupCloseButton').click(function(){
-        $('.hover_bkgr_fricc').hide();
-    });
-});
-
-fetch('https://api.myjson.com/bins/qzuzi')
-  .then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' +
-          response.status);
-        return;
-      }
-
-      // Examine the text in the response
-      response.json().then(function(data) {
-		console.log(data[0]);
-		localStorage.setItem("cartitems", data);
-		console.log("CartItems",  localStorage.getItem("cartitems"));
-		var mainDiv = document.querySelector("#cartitem");
-		for(var i=0; i < data.length; i++){
-			var Div1 = document.createElement("div");
-			Div1.setAttribute("class", "col span_1_of_5 custcol");
-			Div1.innerHTML = `<div class="cartimgsec"><img src="${data[i].img_url}" style="width: 71%;"></div>
-                    <div class="cartitmesec">${data[i].name} </div>
-                    <div class="pricesec"><span class="pricetag">&#8377; ${data[i].price}</span> <strike class="actualpricetag">9000 </strike> <span class="discountamttag">64% off</span></div>
-                    <div><button class="cartBtn" onclick="addtoCart('`+ data[i].id + `')">Add to cart</button></div>`;
-			mainDiv.appendChild(Div1);
-			console.log(Div1);
-		}
-	});
-    }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
-  function addtoCart(data){
-	document.querySelector(".circelposition").style.display = "block";
-	  console.log("data val", data);
 	
-	counter = counter + 1;
-	localStorage.setItem("Counter", counter)
-	var counterSpan = document.querySelector(".cartcounter");
-	counterSpan.innerHTML = counter;
-	}
+	
 </script>
 
 </head>
 
-<body>
+<body onload="mainApp();">
 	
-	<div class="header">
-		<span class="logo">A-Z Shopping</span>
-		<div class="header-right">
-			<span><i class="fas fa-search"></i></span>
-			<span><i class="fas fa-circle circelposition"></i><i class="fas fa-cart-plus"></i></span>
-			<span class="cartcounter"></span>
-		</div>
-	  </div>
+	<div class="header"></div>
 	  <div class="row1 topbar">
 		<div class="column1" style="text-align: center;border-right: 1px solid #ccc;"><a class="trigger_popup_fricc"> <i class="fas fa-sort"></i> Sort </a></div>
 		<div class="column1" style="text-align: center;"><a class="trigger_popup_fricc"><i class="fas fa-filter"></i> Filter</a></div>
 	  </div>
 	<div class="row">
 		<div class="column left sidebar" style="background-color:#eee;">
-			<div style="text-align: center;font-weight: 700;"> Filter</div>
-		 	<div class="flex-container">
+			<div style="text-align: left;font-weight: 700;padding-left: 12px;"> Filter</div>
+		 	<div>
 				<input type="text" id="minval" readonly class="inputslideval">
+				<input type="text" id="maxval" readonly class="inputslideval inputslideval1"> 
 				<div id="slider-range" class="sliderdiv"></div>
-				<input type="text" id="maxval" readonly class="inputslideval"> 
-			  </div>
+			</div>
 			  <div><button class="filterbtn">Apply</button></div>
 		</div>
 		<div class="column right">
 			<div class="topbarmob">
 				<div class="sortmenu"><span class="sortheadtxt">Sort By:</span>
-				<div>Price -- High Low</div> <div>Price -- Low High</div><div>Discount</div>
+				<div><a href="#" class="active" onclick="hightoLow()" >Price -- High Low</a></div>
+				<div><a href="#" onclick="LowtoHigh()" >Price -- Low High</a></div>
+				<div><a href="#" onclick="discountlist()" >Discount</a></div>
 			  </div>
 			</div>
-			<div id="cartitem" class="section group" style="padding:10px;margin-right: 2px;background: #eee;">
-				
-			</div>
+			<div id="cartitem" class="section group" style="padding:10px;margin-right: 2px;background: #eee;"></div>
 			
 		</div>
 	  </div>
@@ -191,5 +93,10 @@ fetch('https://api.myjson.com/bins/qzuzi')
 			<p>Add any HTML content<br />inside the popup box!</p>
 		</div>
 	</div>
+	<script src="script/app.js"></script>
+	<script src="script/headercomp.js"></script>
+	<script src="script/cartitems.js"></script>
+	<script src="script/filtercomp.js"></script>
+	<script src="script/sortcomp.js"></script>
 </body>
 </html>
