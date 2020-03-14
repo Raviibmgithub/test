@@ -1,7 +1,8 @@
 var counter = 0;
 
 function getItems() {
-    fetch('https://api.myjson.com/bins/qzuzi')
+     fetch('https://api.myjson.com/bins/qzuzi')
+ //   fetch('./items.json')
 .then(
   function(response) {
     if (response.status !== 200) {
